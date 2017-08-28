@@ -5,18 +5,15 @@
 
 <div class="panel">
   <div class="panel-heading"><%= @chatroom.topic %></div>
-  <% @chatroom.messages.each do |message| %>
-    <div class="panel-block" id="<%= dom_id message %>">
-      <strong><%= message.user_display %></strong>:
-      <%= message.body %>
-    </div>
-  <% end %>
+  <div class="js-chat-messages">
+    <%= render @chatroom.messages %>
+  </div>
 </div>
 
-<%= form_for [@chatroom, @message] do |f| %>
+<%= form_for [@chatroom, @message], remote: true do |f| %>
   <div class="field is-grouped">
     <div class="control is-expanded">
-      <%= f.text_field :body, class: "input", placeholder: "Type to chat", autofocus: true, autocomplete: false %>
+      <%= f.text_field :body, class: "input js-clear-input", placeholder: "Type to chat", autofocus: true, autocomplete: false %>
     </div>
     <div class="control">
       <%= f.submit "Enter", class: "button is-primary" %>

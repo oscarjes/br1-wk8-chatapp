@@ -12,6 +12,7 @@ function setupRoom(roomId) {
       },
       received: function(data) {
         console.log('#ChatChannel received:', data);
+        $('.js-chat-messages').append(data.html);
       }
     }
   );
